@@ -4,5 +4,5 @@ services:
   roku-scan-app:
     build: .
     environment:
-      - INTERVAL_IN_MINUTES=1
+      - INTERVAL_IN_MINUTES=${INTERVAL_IN_MINUTES}
     restart: always
