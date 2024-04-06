@@ -5,4 +5,4 @@ services:
     build: .
     environment:
       - INTERVAL_IN_MINUTES=${INTERVAL_IN_MINUTES}
-    restart: always
+    restart: unless-stopped

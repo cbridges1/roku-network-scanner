@@ -23,7 +23,7 @@ async function defineNetwork() {
 
     if(status === 'success') {
       workingAddress = currentIp;
-      console.log(workingAddress);
+      console.log('Network starting at: ', workingAddress);
       break;
     }
   }
@@ -46,7 +46,7 @@ async function scanNetwork() {
         method: 'POST',
       });
 
-      console.log(currentIp);
+      console.log('Command sent to: ', currentIp);
       console.log(result.status);
     })
     .catch(function (err) {
@@ -54,7 +54,7 @@ async function scanNetwork() {
     });
   }
 
-  console.log('Interval complete.')
+  console.log('Interval complete.');
 }
 
 // Helper functions to convert between IP and number representations
@@ -74,10 +74,14 @@ const intervalInMinutes = process.env.INTERVAL_IN_MINUTES;
 const intervalInMilliseconds = intervalInMinutes * 60 * 1000;
 
 async function start() {
+  await run();
+  const intervalId = setInterval(run, intervalInMilliseconds);
+}
+
+async function run() {
+  console.log('Scan running at: ', new Date().toString());
   await defineNetwork();
   await scanNetwork();
-  
-  const intervalId = setInterval(scanNetwork, intervalInMilliseconds);
 }
 
 start();
