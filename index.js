@@ -6,6 +6,8 @@ const nets = networkInterfaces();
 let addresses = ['192.168.0.1', '192.168.1.1', '192.168.1.254', '10.0.0.138', '192.168.2.1', '10.0.0.1', '10.0.0.2', '10.1.1.1', '192.168.1.10', '192.168.1.210', '192.168.1.99', '192.168.15.1', '192.168.16.1', '192.168.2.1'];
 let workingAddress = '';
 
+const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
+
 async function defineNetwork() {
   for (let i = 0; i < addresses.length; i++) {
     const currentIp = addresses[i];
@@ -52,9 +54,11 @@ async function scanNetwork() {
     .catch(function (err) {
       
     });
+    await sleep(100);
   }
 
   console.log('Interval complete.');
+  console.log();
 }
 
 // Helper functions to convert between IP and number representations
